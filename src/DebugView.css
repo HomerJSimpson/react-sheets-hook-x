@@ -1,0 +1,26 @@
+.Debug {
+  background-color: #666;
+  color: #ddd;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.Debug > header > h4 {
+  margin: 0;
+  padding: 1vh 1vw;
+  text-shadow: 0.5px 0.5px 1px black;
+  color: white;
+  text-transform: lowercase;
+}
+.Debug hr {
+  border-style: solid;
+  color: transparent;
+  border-bottom: 1px solid teal;
+  margin: 1px;
+}
+
+.Debug section {
+  padding: 0 1em;
+  font-size: small;
+}
