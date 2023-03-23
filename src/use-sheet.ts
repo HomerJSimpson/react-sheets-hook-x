@@ -1,4 +1,5 @@
 import React from "react";
+
 import useScript from "./use-script";
 
 const gapiJsURL = "https://apis.google.com/js/api.js";
@@ -57,26 +58,40 @@ export default function useSheet(args: ISheetHookArgs) {
   let gapiLoadingStatus = useScript(gapiJsURL);
 
   React.useEffect(() => {
+    console.log("both");
     if (
       gisLoadingStatus.toLowerCase() === "ready" &&
       gapiLoadingStatus.toLowerCase() === "ready"
     ) {
       dispatch({ type: ActionTypes.READY });
-    } else if (gapiLoadingStatus.toLowerCase() === "ready")
+    }
+    return () => {};
+  }, [gisLoadingStatus, gapiLoadingStatus]);
+
+  React.useEffect(() => {
+    console.log("gapi");
+    if (gapiLoadingStatus.toLowerCase() === "ready") {
       dispatch({
         type: ActionTypes.JSLOADING_RESULT,
         status: "gapiJS",
         results: gapiLoadingStatus,
       });
-    else if (gisLoadingStatus.toLowerCase() === "ready")
+    }
+
+    return () => {};
+  }, [gapiLoadingStatus]);
+
+  React.useEffect(() => {
+    console.log("gis");
+    if (gisLoadingStatus.toLowerCase() === "ready") {
       dispatch({
         type: ActionTypes.JSLOADING_RESULT,
         status: "gisJS",
         results: gisLoadingStatus,
       });
-
+    }
     return () => {};
-  }, [gapiLoadingStatus, gisLoadingStatus]);
+  }, [gisLoadingStatus]);
 
   return state;
 }
